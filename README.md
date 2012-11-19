@@ -1,6 +1,6 @@
 # Bremen
 
-TODO: Write a gem description
+Bremen provides common search interface for some music websites. it supports YouTube, SoundCloud, MixCloud and Nicovideo
 
 ## Installation
 
@@ -18,7 +18,34 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Just call `.find` metod with keyword.
+
+### YouTube/MixCloud/Nicovideo
+
+    Bremen::Youtube.find(keyword: 'Perfume')
+
+### SoundCloud
+
+Before searching, you need to set consumer key.
+
+    Bremen::Soundcloud.consumer_key = 'your_consumer_key'
+    Bremen::Soundcloud.find(keyword: 'KyaryPamyuPamyu')
+
+### Optional Params
+
+You can add optional parameters for filtering. But not supports all official API's filters.
+
+    Bremen::Youtube.find(keyword: 'capsule', order: 'relevance', limit: 10)
+
+## API References
+
+- [Reference Guide: Data API Protocol - YouTube — Google Developers](https://developers.google.com/youtube/2.0/reference#Searching_for_videos)
+- [Docs - API - Reference - SoundCloud Developers](http://developers.soundcloud.com/docs/api/reference#tracks)
+- [API documentation | Mixcloud](http://www.mixcloud.com/developers/documentation/#search)
+
+## Supported versions
+
+- Ruby 1.9.2 or higher
 
 ## Contributing
 

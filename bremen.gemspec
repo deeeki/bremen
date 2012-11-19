@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["itzki"]
   gem.email         = ["itzki.h@gmail.com"]
   gem.description   = %q{integrated searcher of audio tracks on music sites}
-  gem.summary       = %q{Bremen provides common search interface for some music websites. it supports Youtube, Soundcloud, Mixcloud and Nicovideo}
+  gem.summary       = %q{Bremen provides common search interface for some music websites. it supports YouTube, SoundCloud, MixCloud and Nicovideo}
   gem.homepage      = "https://github.com/itzki/bremen"
 
   gem.files         = `git ls-files`.split($/)
