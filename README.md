@@ -1,6 +1,6 @@
 # Bremen
 
-Bremen provides common search interface for some music websites. it supports YouTube, SoundCloud, MixCloud and Nicovideo
+**Bremen** provides common search interface for some music websites. it supports YouTube, SoundCloud, MixCloud and Nicovideo
 
 ## Installation
 
@@ -16,26 +16,52 @@ Or install it yourself as:
 
     $ gem install bremen
 
+## Setting
+
+As far as Soundcloud concerned, you need to set consumer key before using.
+
+    Bremen::Soundcloud.consumer_key = 'your_consumer_key'
+
 ## Usage
 
-Just call `.find` metod with keyword.
+### Retrieving a single track
 
-### YouTube/MixCloud/Nicovideo
+call `.find` method with uid(unique key) or url.
+
+    Bremen::Youtube.find('XXXXXXXXXXX')
+    Bremen::Youtube.find('http://www.youtube.com/watch?v=XXXXXXXXXXX')
+    Bremen::Soundcloud.find('1111111')
+    Bremen::Soundcloud.find('http://soundcloud.com/author/title')
+    Bremen::Mixcloud.find('/author/title/')
+    Bremen::Mixcloud.find('http://www.mixcloud.com/author/title/')
+    Bremen::Nicovideo.find('sm1111111')
+    Bremen::Nicovideo.find('http://www.nicovideo.jp/watch/sm1111111')
+
+### Retrieving multiple tracks
+
+call `.search` method with keyword.
 
     Bremen::Youtube.find(keyword: 'Perfume')
 
-### SoundCloud
-
-Before searching, you need to set consumer key.
-
-    Bremen::Soundcloud.consumer_key = 'your_consumer_key'
-    Bremen::Soundcloud.find(keyword: 'KyaryPamyuPamyu')
-
-### Optional Params
+#### Optional params
 
 You can add optional parameters for filtering. But not supports all official API's filters.
 
-    Bremen::Youtube.find(keyword: 'capsule', order: 'relevance', limit: 10)
+    Bremen::Youtube.find(keyword: 'KyaryPamyuPamyu', order: 'relevance', limit: 10)
+
+### Track object
+
+Retrieving methods return Track object(s).
+
+attribute  |                      |
+-----------|----------------------|
+uid        | unique key in a site |
+url        |                      |
+title      |                      |
+author     |                      |
+length     | duration of track    |
+created_at | released datetime    |
+updated_at | modified datetime    |
 
 ## API References
 
@@ -45,7 +71,7 @@ You can add optional parameters for filtering. But not supports all official API
 
 ## Supported versions
 
-- Ruby 1.9.2 or higher
+- Ruby 1.9.3 or higher
 
 ## Contributing
 
