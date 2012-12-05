@@ -12,13 +12,21 @@ module Bremen
     }
 
     class << self
+      def build_query options = {}
+        super(options.merge(alt: 'json'))
+      end
+
+      def find_url uid_or_url
+        uid = uid_or_url.scan(%r{[?&]v=(.{11})}).flatten.first || uid_or_url
+        "#{BASE_URL}#{uid}?#{build_query}"
+      end
+
       def search_url options = {}
         options = default_options.merge(options)
         query = {
           vq: options[:keyword],
           orderby: options[:order],
           :"max-results" => options[:limit],
-          alt: 'json',
         }
         "#{BASE_URL}-/#{options[:category]}/#{options[:tag]}/?#{build_query(query)}"
       end
@@ -37,7 +45,11 @@ module Bremen
       end
 
       private
-      def convert_from_response response
+      def convert_singly response
+        from_api(JSON.parse(response)['entry'])
+      end
+
+      def convert_multiply response
         JSON.parse(response)['feed']['entry'].map{|t| from_api(t) }
       end
     end

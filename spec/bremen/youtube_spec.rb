@@ -2,6 +2,23 @@ $:.unshift(File.expand_path('../../', __FILE__))
 require 'spec_helper'
 
 describe Bremen::Youtube do
+  describe '.find_url' do
+    subject{ Bremen::Youtube.find_url(uid_or_url) }
+    describe 'given id' do
+      let(:uid_or_url){ 'XXXXXXXXXXX' }
+      it 'generate' do
+        subject.must_equal 'http://gdata.youtube.com/feeds/api/videos/XXXXXXXXXXX?alt=json'
+      end
+    end
+
+    describe 'given url' do
+      let(:uid_or_url){ 'http://www.youtube.com/watch?v=XXXXXXXXXXX' }
+      it 'generate' do
+        subject.must_equal 'http://gdata.youtube.com/feeds/api/videos/XXXXXXXXXXX?alt=json'
+      end
+    end
+  end
+
   describe '.search_url' do
     subject{ Bremen::Youtube.search_url(params) }
     describe 'only keyword' do
@@ -19,9 +36,17 @@ describe Bremen::Youtube do
     end
   end
 
-  describe '.convert_from_response' do
-    subject{ Bremen::Youtube.send(:convert_from_response, response) }
-    let(:response){ fixture('youtube.json') }
+  describe '.convert_singly' do
+    subject{ Bremen::Youtube.send(:convert_singly, response) }
+    let(:response){ fixture('youtube_single.json') }
+    it 'convert successfully' do
+      subject.title.must_equal 'Title'
+    end
+  end
+
+  describe '.convert_multiply' do
+    subject{ Bremen::Youtube.send(:convert_multiply, response) }
+    let(:response){ fixture('youtube_multi.json') }
     it 'convert successfully' do
       subject.first.title.must_equal 'Title'
     end

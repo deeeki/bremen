@@ -3,7 +3,7 @@ require 'bremen/base'
 
 module Bremen
   class Soundcloud < Bremen::Base
-    BASE_URL = 'http://api.soundcloud.com/tracks.json'
+    BASE_URL = 'http://api.soundcloud.com/'
     self.default_options = {
       keyword: '',
       order: 'created_at', #created_at/hotness
@@ -14,17 +14,28 @@ module Bremen
     class << self
       attr_accessor :consumer_key
 
-      def search_url options = {}
+      def build_query options = {}
         raise %Q{"#{self.name}.consumer_key" must be set} unless consumer_key
+        super(options.merge(consumer_key: consumer_key))
+      end
+
+      def find_url uid_or_url
+        if uid_or_url.to_s =~ %r{\A\d+\Z}
+          "#{BASE_URL}tracks/#{uid_or_url}.json?#{build_query}"
+        else
+          "#{BASE_URL}resolve.json?#{build_query({url: uid_or_url})}"
+        end
+      end
+
+      def search_url options = {}
         options = default_options.merge(options)
         query = {
           q: options[:keyword],
           order: options[:order],
           limit: options[:limit],
           filter: options[:filter],
-          consumer_key: consumer_key,
         }
-        "#{BASE_URL}?#{build_query(query)}"
+        "#{BASE_URL}tracks.json?#{build_query(query)}"
       end
 
       def from_api hash = {}
@@ -40,7 +51,11 @@ module Bremen
       end
 
       private
-      def convert_from_response response
+      def convert_singly response
+        from_api(JSON.parse(response))
+      end
+
+      def convert_multiply response
         JSON.parse(response).map{|t| from_api(t) }
       end
     end

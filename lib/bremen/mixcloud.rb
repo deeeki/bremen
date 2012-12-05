@@ -3,13 +3,21 @@ require 'bremen/base'
 
 module Bremen
   class Mixcloud < Bremen::Base
-    BASE_URL = 'http://api.mixcloud.com/search/'
+    BASE_URL = 'http://api.mixcloud.com/'
     self.default_options = {
       keyword: '',
       limit: 20,
     }
 
     class << self
+      def find_url uid_or_url
+        if uid_or_url.to_s.include?('www.mixcloud.com')
+          uid_or_url.sub('www.mixcloud.com', 'api.mixcloud.com')
+        else
+          "#{BASE_URL[0..-2]}#{uid_or_url}"
+        end
+      end
+
       def search_url options = {}
         options = default_options.merge(options)
         query = {
@@ -17,7 +25,7 @@ module Bremen
           limit: options[:limit],
           type: 'cloudcast',
         }
-        "#{BASE_URL}?#{build_query(query)}"
+        "#{BASE_URL}search/?#{build_query(query)}"
       end
 
       def from_api hash = {}
@@ -34,7 +42,11 @@ module Bremen
       end
 
       private
-      def convert_from_response response
+      def convert_singly response
+        from_api(JSON.parse(response))
+      end
+
+      def convert_multiply response
         JSON.parse(response)['data'].map{|t| from_api(t) }
       end
     end
