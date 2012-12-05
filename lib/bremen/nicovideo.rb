@@ -37,14 +37,13 @@ module Bremen
       private
       def convert_singly response
         uid = response.scan(%r{<link rel="canonical" href="/watch/([^"]+)">}).flatten.first
-        title = CGI.unescape(response.scan(%r{<meta property="og:title" content="(.+)">}).flatten.first.to_s)
-        length = response.scan(%r{<meta property="video:duration" content="(\d+)">}).flatten.first.to_i
         created_at = Time.parse(response.scan(%r{<meta property="video:release_date" content="(.+)">}).flatten.first.to_s)
         new({
           uid: uid,
           url: "#{BASE_URL}watch/#{uid}",
-          title: title,
-          length: length,
+          title: CGI.unescape(response.scan(%r{<meta property="og:title" content="(.+)">}).flatten.first.to_s),
+          length: response.scan(%r{<meta property="video:duration" content="(\d+)">}).flatten.first.to_i,
+          thumbnail_url: response.scan(%r{<meta property="og:image" content="(.+)">}).flatten.first,
           created_at: created_at,
           updated_at: created_at,
         })
@@ -60,6 +59,7 @@ module Bremen
             url: "#{BASE_URL}watch/#{uid}",
             title: CGI.unescape(html.scan(%r{<a [^>]+ class="watch" [^>]+>(.+)</a>}).flatten.first.to_s),
             length: min.to_i * 60 + sec.to_i,
+            thumbnail_url: html.scan(%r{<img src="([^"]+)"[^>]*class="img_std96" ?/?>}).flatten.first,
             created_at: created_at,
             updated_at: created_at,
           })

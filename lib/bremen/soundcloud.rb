@@ -45,6 +45,7 @@ module Bremen
           title: hash['title'],
           author: hash['user']['username'],
           length: (hash['duration'].to_i / 1000).round,
+          thumbnail_url: hash['artwork_url'] ? hash['artwork_url'].sub(%r{\?.*}, '') : nil,
           created_at: Time.parse(hash['created_at']),
           updated_at: Time.parse(hash['created_at']),
         })

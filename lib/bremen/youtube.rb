@@ -39,6 +39,7 @@ module Bremen
           title: hash['title']['$t'],
           author: hash['author'].first['name']['$t'],
           length: hash['media$group']['yt$duration']['seconds'].to_i,
+          thumbnail_url: hash['media$group']['media$thumbnail'][0]['url'],
           created_at: Time.parse(hash['published']['$t']),
           updated_at: Time.parse(hash['updated']['$t']),
         })

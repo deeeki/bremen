@@ -36,6 +36,7 @@ module Bremen
           title: hash['name'],
           author: hash['user']['name'],
           length: hash['audio_length'].to_i,
+          thumbnail_url: hash['pictures']['medium'],
           created_at: created_at,
           updated_at: created_at,
         })

@@ -53,15 +53,16 @@ You can add optional parameters for filtering. But not supports all official API
 
 Retrieving methods return Track object(s).
 
-attribute  |                      |
------------|----------------------|
-uid        | unique key in a site |
-url        |                      |
-title      |                      |
-author     |                      |
-length     | duration of track    |
-created_at | released datetime    |
-updated_at | modified datetime    |
+attribute     |                        |
+--------------|------------------------|
+uid           | unique key in a site   |
+url           |                        |
+title         |                        |
+author        |                        |
+length        | duration of track      |
+thumbnail_url | thumbnail image        |
+created_at    | released datetime      |
+updated_at    | modified datetime      |
 
 ## API References
 
