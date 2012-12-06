@@ -41,13 +41,13 @@ call `.find` method with uid(unique key) or url.
 
 call `.search` method with keyword.
 
-    Bremen::Youtube.find(keyword: 'Perfume')
+    Bremen::Youtube.search(keyword: 'Perfume')
 
 #### Optional params
 
 You can add optional parameters for filtering. But not supports all official API's filters.
 
-    Bremen::Youtube.find(keyword: 'KyaryPamyuPamyu', order: 'relevance', limit: 10)
+    Bremen::Youtube.search(keyword: 'KyaryPamyuPamyu', order: 'relevance', limit: 10)
 
 ### Track object
 
