@@ -34,7 +34,12 @@ module Bremen
           uid: hash['key'],
           url: hash['url'],
           title: hash['name'],
-          author: hash['user']['name'],
+          author: Bremen::Author.new({
+            uid: hash['user']['key'],
+            url: hash['user']['url'],
+            name: hash['user']['name'],
+            thumbnail_url: hash['user']['pictures']['medium'],
+          }),
           length: hash['audio_length'].to_i,
           thumbnail_url: hash['pictures']['medium'],
           created_at: created_at,

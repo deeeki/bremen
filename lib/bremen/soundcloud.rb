@@ -43,7 +43,12 @@ module Bremen
           uid: hash['id'],
           url: hash['permalink_url'],
           title: hash['title'],
-          author: hash['user']['username'],
+          author: Bremen::Author.new({
+            uid: hash['user']['id'],
+            url: hash['user']['permalink_url'],
+            name: hash['user']['username'],
+            thumbnail_url: hash['user']['avatar_url'].sub(%r{\?.*}, ''),
+          }),
           length: (hash['duration'].to_i / 1000).round,
           thumbnail_url: hash['artwork_url'] ? hash['artwork_url'].sub(%r{\?.*}, '') : nil,
           created_at: Time.parse(hash['created_at']),

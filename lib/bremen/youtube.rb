@@ -33,11 +33,16 @@ module Bremen
 
       def from_api hash = {}
         uid = hash['id']['$t'].sub('http://gdata.youtube.com/feeds/api/videos/', '')
+        author = hash['author'].first
         new({
           uid: uid,
           url: "http://www.youtube.com/watch?v=#{uid}",
           title: hash['title']['$t'],
-          author: hash['author'].first['name']['$t'],
+          author: Bremen::Author.new({
+            uid: author.key?('yt$userId') ? author['yt$userId']['$t'] : nil,
+            url: author['uri']['$t'].sub('gdata.youtube.com/feeds/api/users/', 'www.youtube.com/channel/UC'),
+            name: author['name']['$t'],
+          }),
           length: hash['media$group']['yt$duration']['seconds'].to_i,
           thumbnail_url: hash['media$group']['media$thumbnail'][0]['url'],
           created_at: Time.parse(hash['published']['$t']),

@@ -42,6 +42,9 @@ module Bremen
           uid: uid,
           url: "#{BASE_URL}watch/#{uid}",
           title: CGI.unescape(response.scan(%r{<meta property="og:title" content="(.+)">}).flatten.first.to_s),
+          author: Bremen::Author.new({
+            name: response.scan(%r{<strong itemprop="name">(.+)</strong>}).flatten.first,
+          }),
           length: response.scan(%r{<meta property="video:duration" content="(\d+)">}).flatten.first.to_i,
           thumbnail_url: response.scan(%r{<meta property="og:image" content="(.+)">}).flatten.first,
           created_at: created_at,
