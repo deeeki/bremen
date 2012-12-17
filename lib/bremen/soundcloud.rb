@@ -8,6 +8,7 @@ module Bremen
       keyword: '',
       order: 'created_at', #created_at/hotness
       limit: 50,
+      page: 1,
       filter: '', #(all)/public/private/streamable/downloadable
     }
 
@@ -33,6 +34,7 @@ module Bremen
           q: options[:keyword],
           order: options[:order],
           limit: options[:limit],
+          offset: options[:limit] * (options[:page] - 1),
           filter: options[:filter],
         }
         "#{BASE_URL}tracks.json?#{build_query(query)}"

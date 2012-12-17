@@ -24,14 +24,14 @@ describe Bremen::Mixcloud do
     describe 'only keyword' do
       let(:params){ {keyword: 'searchword'} }
       it 'generate' do
-        subject.must_equal 'http://api.mixcloud.com/search/?q=searchword&limit=20&type=cloudcast'
+        subject.must_equal 'http://api.mixcloud.com/search/?q=searchword&limit=20&offset=0&type=cloudcast'
       end
     end
 
     describe 'full params' do
-      let(:params){ {keyword: 'searchword', limit: 1} }
+      let(:params){ {keyword: 'searchword', limit: 10, page: 2} }
       it 'generate' do
-        subject.must_equal 'http://api.mixcloud.com/search/?q=searchword&limit=1&type=cloudcast'
+        subject.must_equal 'http://api.mixcloud.com/search/?q=searchword&limit=10&offset=10&type=cloudcast'
       end
     end
   end

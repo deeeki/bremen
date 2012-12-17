@@ -6,6 +6,7 @@ module Bremen
     BASE_URL = 'http://www.nicovideo.jp/'
     self.default_options = {
       keyword: '',
+      page: 1,
       sort: 'f', #n(newer commented)/v(viewed)/r(most commented)/m(listed)/f(uploaded)/l(duration)
       order: 'd', #a(asc)/d(desc)
       within: '', #1(24h)/2(1w)/3(1m)
@@ -25,6 +26,7 @@ module Bremen
       def search_url options = {}
         options = default_options.merge(options)
         query = {
+          page: options[:page],
           sort: options[:sort],
           order: options[:order],
           f_range: options[:within],
@@ -53,6 +55,8 @@ module Bremen
       end
 
       def convert_multiply response
+        return [] if response.scan(%r{<div class="mb16p4">}).flatten.first
+
         response.scan(%r{<div class="thumb_col_1">\n<!---->\n(.*?)\n<!---->\n</div></div>}m).flatten.map do |html|
           uid = html.scan(%r{<table [^>]+ summary="(.+)">}).flatten.first
           min, sec = html.scan(%r{<p class="vinfo_length"><span>([\d:]+)</span></p>}).flatten.first.to_s.split(':')

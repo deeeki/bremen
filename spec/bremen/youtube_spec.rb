@@ -24,14 +24,14 @@ describe Bremen::Youtube do
     describe 'only keyword' do
       let(:params){ {keyword: 'searchword'} }
       it 'generate' do
-        subject.must_equal 'http://gdata.youtube.com/feeds/api/videos/-/Music//?vq=searchword&orderby=published&max-results=25&alt=json'
+        subject.must_equal 'http://gdata.youtube.com/feeds/api/videos/-/Music//?vq=searchword&orderby=published&max-results=25&start-index=1&alt=json'
       end
     end
 
     describe 'full params' do
-      let(:params){ {keyword: 'searchword', order: 'relevance', limit: 1, category: 'Entertainment', tag: 'game'} }
+      let(:params){ {keyword: 'searchword', order: 'relevance', limit: 10, page: 2, category: 'Entertainment', tag: 'game'} }
       it 'generate' do
-        subject.must_equal 'http://gdata.youtube.com/feeds/api/videos/-/Entertainment/game/?vq=searchword&orderby=relevance&max-results=1&alt=json'
+        subject.must_equal 'http://gdata.youtube.com/feeds/api/videos/-/Entertainment/game/?vq=searchword&orderby=relevance&max-results=10&start-index=2&alt=json'
       end
     end
   end

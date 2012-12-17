@@ -7,6 +7,7 @@ module Bremen
     self.default_options = {
       order: 'published', #relevance/published/viewCount/rating
       limit: 25,
+      page: 1,
       category: 'Music',
       tag: '',
     }
@@ -27,6 +28,7 @@ module Bremen
           vq: options[:keyword],
           orderby: options[:order],
           :"max-results" => options[:limit],
+          :"start-index" => options[:page],
         }
         "#{BASE_URL}-/#{options[:category]}/#{options[:tag]}/?#{build_query(query)}"
       end
@@ -56,7 +58,9 @@ module Bremen
       end
 
       def convert_multiply response
-        JSON.parse(response)['feed']['entry'].map{|t| from_api(t) }
+        feed = JSON.parse(response)['feed']
+        return [] unless feed['entry']
+        feed['entry'].map{|t| from_api(t) }
       end
     end
   end

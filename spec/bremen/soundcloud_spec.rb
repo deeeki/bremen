@@ -42,14 +42,14 @@ describe Bremen::Soundcloud do
     describe 'only keyword' do
       let(:params){ {keyword: 'searchword'} }
       it 'generate' do
-        subject.must_equal 'http://api.soundcloud.com/tracks.json?q=searchword&order=created_at&limit=50&filter=&consumer_key=CK'
+        subject.must_equal 'http://api.soundcloud.com/tracks.json?q=searchword&order=created_at&limit=50&offset=0&filter=&consumer_key=CK'
       end
     end
 
     describe 'full params' do
-      let(:params){ {keyword: 'searchword', order: 'hotness', limit: 1, filter: 'public'} }
+      let(:params){ {keyword: 'searchword', order: 'hotness', limit: 10, page: 2, filter: 'public'} }
       it 'generate' do
-        subject.must_equal 'http://api.soundcloud.com/tracks.json?q=searchword&order=hotness&limit=1&filter=public&consumer_key=CK'
+        subject.must_equal 'http://api.soundcloud.com/tracks.json?q=searchword&order=hotness&limit=10&offset=10&filter=public&consumer_key=CK'
       end
     end
   end

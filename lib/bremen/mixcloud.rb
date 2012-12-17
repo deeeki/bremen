@@ -7,6 +7,7 @@ module Bremen
     self.default_options = {
       keyword: '',
       limit: 20,
+      page: 1,
     }
 
     class << self
@@ -23,6 +24,7 @@ module Bremen
         query = {
           q: options[:keyword],
           limit: options[:limit],
+          offset: options[:limit] * (options[:page] - 1),
           type: 'cloudcast',
         }
         "#{BASE_URL}search/?#{build_query(query)}"
