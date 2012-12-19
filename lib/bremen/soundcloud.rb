@@ -42,11 +42,11 @@ module Bremen
 
       def from_api hash = {}
         new({
-          uid: hash['id'],
+          uid: hash['id'].to_s,
           url: hash['permalink_url'],
           title: hash['title'],
           author: Bremen::Author.new({
-            uid: hash['user']['id'],
+            uid: hash['user']['id'].to_s,
             url: hash['user']['permalink_url'],
             name: hash['user']['username'],
             thumbnail_url: hash['user']['avatar_url'].sub(%r{\?.*}, ''),

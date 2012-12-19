@@ -59,6 +59,7 @@ describe Bremen::Soundcloud do
     let(:response){ fixture('soundcloud_single.json') }
     it 'convert successfully' do
       subject.title.must_equal 'Title'
+      subject.uid.must_equal '11111111'
     end
   end
 
@@ -67,6 +68,7 @@ describe Bremen::Soundcloud do
     let(:response){ fixture('soundcloud_multi.json') }
     it 'convert successfully' do
       subject.first.title.must_equal 'Title'
+      subject.first.uid.must_equal '11111111'
     end
   end
 end
