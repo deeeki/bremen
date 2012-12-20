@@ -39,7 +39,7 @@ module Bremen
       private
       def convert_singly response
         uid = response.scan(%r{<link rel="canonical" href="/watch/([^"]+)">}).flatten.first
-        created_at = Time.parse(response.scan(%r{<meta property="video:release_date" content="(.+)">}).flatten.first.to_s)
+        created_at = Time.parse(response.scan(%r{<meta property="video:release_date" content="(.+)">}).flatten.first.to_s).utc
         new({
           uid: uid,
           url: "#{BASE_URL}watch/#{uid}",
@@ -60,7 +60,7 @@ module Bremen
         response.scan(%r{<div class="thumb_col_1">\n<!---->\n(.*?)\n<!---->\n</div></div>}m).flatten.map do |html|
           uid = html.scan(%r{<table [^>]+ summary="(.+)">}).flatten.first
           min, sec = html.scan(%r{<p class="vinfo_length"><span>([\d:]+)</span></p>}).flatten.first.to_s.split(':')
-          created_at = Time.parse(html.scan(%r{<strong>(.+:\d\d)</strong>}).flatten.first.to_s.gsub(/\xE5\xB9\xB4|\xE6\x9C\x88|\xE6\x97\xA5/, ''))
+          created_at = Time.parse(html.scan(%r{<strong>(.+:\d\d)</strong>}).flatten.first.to_s.gsub(/\xE5\xB9\xB4|\xE6\x9C\x88|\xE6\x97\xA5/, '')).utc
           new({
             uid: uid,
             url: "#{BASE_URL}watch/#{uid}",

@@ -41,6 +41,7 @@ module Bremen
       end
 
       def from_api hash = {}
+        created_at = Time.parse(hash['created_at']).utc
         new({
           uid: hash['id'].to_s,
           url: hash['permalink_url'],
@@ -53,8 +54,8 @@ module Bremen
           }),
           length: (hash['duration'].to_i / 1000).round,
           thumbnail_url: hash['artwork_url'] ? hash['artwork_url'].sub(%r{\?.*}, '') : nil,
-          created_at: Time.parse(hash['created_at']),
-          updated_at: Time.parse(hash['created_at']),
+          created_at: created_at,
+          updated_at: created_at,
         })
       end
 

@@ -41,6 +41,7 @@ describe Bremen::Nicovideo do
     let(:response){ fixture('nicovideo_single.html') }
     it 'convert successfully' do
       subject.title.must_equal 'Title'
+      subject.created_at.zone.must_equal 'UTC'
     end
   end
 
@@ -49,6 +50,7 @@ describe Bremen::Nicovideo do
     let(:response){ fixture('nicovideo_multi.html') }
     it 'convert successfully' do
       subject.first.title.must_equal 'Title'
+      subject.first.created_at.zone.must_equal 'UTC'
     end
   end
 end

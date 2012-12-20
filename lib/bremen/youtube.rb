@@ -47,8 +47,8 @@ module Bremen
           }),
           length: hash['media$group']['yt$duration']['seconds'].to_i,
           thumbnail_url: hash['media$group']['media$thumbnail'][0]['url'],
-          created_at: Time.parse(hash['published']['$t']),
-          updated_at: Time.parse(hash['updated']['$t']),
+          created_at: Time.parse(hash['published']['$t']).utc,
+          updated_at: Time.parse(hash['updated']['$t']).utc,
         })
       end
 

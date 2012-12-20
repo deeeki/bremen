@@ -31,7 +31,7 @@ module Bremen
       end
 
       def from_api hash = {}
-        created_at = Time.parse(hash['created_time'])
+        created_at = Time.parse(hash['created_time']).utc
         new({
           uid: hash['key'],
           url: hash['url'],

@@ -60,6 +60,7 @@ describe Bremen::Soundcloud do
     it 'convert successfully' do
       subject.title.must_equal 'Title'
       subject.uid.must_equal '11111111'
+      subject.created_at.zone.must_equal 'UTC'
     end
   end
 
@@ -69,6 +70,7 @@ describe Bremen::Soundcloud do
     it 'convert successfully' do
       subject.first.title.must_equal 'Title'
       subject.first.uid.must_equal '11111111'
+      subject.first.created_at.zone.must_equal 'UTC'
     end
   end
 end
