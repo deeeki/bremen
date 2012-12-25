@@ -18,9 +18,9 @@ Or install it yourself as:
 
 ## Setting
 
-As far as Soundcloud concerned, you need to set consumer key before using.
+As far as Soundcloud concerned, you need to set your app's client id before using.
 
-    Bremen::Soundcloud.consumer_key = 'your_consumer_key'
+    Bremen::Soundcloud.client_id = 'your_client_id'
 
 ## Usage
 

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Bremen::Base do
   describe '.search' do
-    #TODO: need to suport autoload soundcloud consumerkey from dotfile.
+    #TODO: need to suport autoload soundcloud client id from dotfile.
     ['Youtube', 'Mixcloud', 'Nicovideo'].each do |site|
       describe site do
         let(:klass){ Bremen.const_get(site) }

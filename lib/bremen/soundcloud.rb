@@ -13,11 +13,11 @@ module Bremen
     }
 
     class << self
-      attr_accessor :consumer_key
+      attr_accessor :client_id
 
       def build_query options = {}
-        raise %Q{"#{self.name}.consumer_key" must be set} unless consumer_key
-        super(options.merge(consumer_key: consumer_key))
+        raise %Q{"#{self.name}.client_id" must be set} unless client_id
+        super(options.merge(client_id: client_id))
       end
 
       def find_url uid_or_url
