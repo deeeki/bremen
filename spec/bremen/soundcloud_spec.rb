@@ -2,14 +2,27 @@ $:.unshift(File.expand_path('../../', __FILE__))
 require 'spec_helper'
 
 describe Bremen::Soundcloud do
+  after{ Bremen::Soundcloud.client_id = nil }
   describe '.build_query' do
+    before do
+      Bremen::Soundcloud.client_id = nil
+      ENV['SOUNDCLOUD_CLIENT_ID'] = nil
+    end
     describe 'not set client_id' do
       it 'raise error' do
-        lambda{ Bremen::Soundcloud.search_url }.must_raise RuntimeError
+        lambda{ Bremen::Soundcloud.build_query({a: 'b'}) }.must_raise RuntimeError
       end
     end
 
-    describe 'set client_id' do
+    describe 'set client_id via ENV' do
+      before{ ENV['SOUNDCLOUD_CLIENT_ID'] = 'CID' }
+      subject{ Bremen::Soundcloud.build_query({a: 'b'}) }
+      it 'return query string' do
+        subject.must_equal 'a=b&client_id=CID'
+      end
+    end
+
+    describe 'set client_id directly' do
       before{ Bremen::Soundcloud.client_id = 'CID' }
       subject{ Bremen::Soundcloud.build_query({a: 'b'}) }
       it 'return query string' do

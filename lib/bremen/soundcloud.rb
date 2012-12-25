@@ -16,6 +16,7 @@ module Bremen
       attr_accessor :client_id
 
       def build_query options = {}
+        self.client_id ||= ENV['SOUNDCLOUD_CLIENT_ID']
         raise %Q{"#{self.name}.client_id" must be set} unless client_id
         super(options.merge(client_id: client_id))
       end

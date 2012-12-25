@@ -22,6 +22,8 @@ As far as Soundcloud concerned, you need to set your app's client id before usin
 
     Bremen::Soundcloud.client_id = 'your_client_id'
 
+Alternately, you can set 'SOUNDCLOUD_CLIENT_ID' environment variable.
+
 ## Usage
 
 ### Retrieving a single track
