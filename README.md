@@ -1,4 +1,4 @@
-# Bremen
+# Bremen [![Build Status](https://travis-ci.org/itzki/bremen.png)](https://travis-ci.org/itzki/bremen)
 
 **Bremen** provides common search interface for some music websites. it supports YouTube, SoundCloud, MixCloud and Nicovideo
 

@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'guard-minitest', ['>= 0']
   gem.add_development_dependency 'rb-fsevent', ['>= 0']
   gem.add_development_dependency 'terminal-notifier-guard', ['>= 0']
+  gem.add_development_dependency 'rake'
 end
