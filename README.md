@@ -18,9 +18,11 @@ Or install it yourself as:
 
 ## Setting
 
-As far as Soundcloud concerned, you need to set your app's client id before using.
+As far as SoundCloud concerned, you need to set your app's client id before using.
 
-    Bremen::Soundcloud.client_id = 'your_client_id'
+```ruby
+Bremen::Soundcloud.client_id = 'your_client_id'
+```
 
 Alternately, you can set 'SOUNDCLOUD_CLIENT_ID' environment variable.
 
@@ -30,26 +32,32 @@ Alternately, you can set 'SOUNDCLOUD_CLIENT_ID' environment variable.
 
 call `.find` method with uid(unique key) or url.
 
-    Bremen::Youtube.find('XXXXXXXXXXX')
-    Bremen::Youtube.find('http://www.youtube.com/watch?v=XXXXXXXXXXX')
-    Bremen::Soundcloud.find('1111111')
-    Bremen::Soundcloud.find('http://soundcloud.com/author/title')
-    Bremen::Mixcloud.find('/author/title/')
-    Bremen::Mixcloud.find('http://www.mixcloud.com/author/title/')
-    Bremen::Nicovideo.find('sm1111111')
-    Bremen::Nicovideo.find('http://www.nicovideo.jp/watch/sm1111111')
+```ruby
+Bremen::Youtube.find('XXXXXXXXXXX')
+Bremen::Youtube.find('http://www.youtube.com/watch?v=XXXXXXXXXXX')
+Bremen::Soundcloud.find('1111111')
+Bremen::Soundcloud.find('http://soundcloud.com/author/title')
+Bremen::Mixcloud.find('/author/title/')
+Bremen::Mixcloud.find('http://www.mixcloud.com/author/title/')
+Bremen::Nicovideo.find('sm1111111')
+Bremen::Nicovideo.find('http://www.nicovideo.jp/watch/sm1111111')
+```
 
 ### Retrieving multiple tracks
 
 call `.search` method with keyword.
 
-    Bremen::Youtube.search(keyword: 'Perfume')
+```ruby
+Bremen::Youtube.search(keyword: 'Perfume')
+```
 
 #### Optional params
 
-You can add optional parameters for filtering. But not supports all official API's filters.
+You can add optional parameters for filtering. But it doesn't support all official API's filters.
 
-    Bremen::Youtube.search(keyword: 'KyaryPamyuPamyu', order: 'relevance', limit: 10)
+```ruby
+Bremen::Youtube.search(keyword: 'KyaryPamyuPamyu', order: 'relevance', limit: 10)
+```
 
 ### Track object
 
@@ -57,7 +65,7 @@ Retrieving methods return Track object(s).
 
 attribute    |type         |description               |
 -------------|-------------|--------------------------|
-uid          |String       |unique key in a site      |
+uid          |String       |unique key for each site  |
 url          |String       |                          |
 title        |String       |                          |
 author       |Author Object|uid/url/name/thumbnail_url|
@@ -66,7 +74,7 @@ thumbnail_url|String       |thumbnail image           |
 created_at   |Time         |released datetime         |
 updated_at   |Time         |modified datetime         |
 
-## API References
+## API references
 
 - [Reference Guide: Data API Protocol - YouTube — Google Developers](https://developers.google.com/youtube/2.0/reference#Searching_for_videos)
 - [Docs - API - Reference - SoundCloud Developers](http://developers.soundcloud.com/docs/api/reference#tracks)
