@@ -1,4 +1,4 @@
-# Bremen [![Build Status](https://travis-ci.org/itzki/bremen.png)](https://travis-ci.org/itzki/bremen) [![Coverage Status](https://coveralls.io/repos/itzki/bremen/badge.png)](https://coveralls.io/r/itzki/bremen)
+# Bremen [![Build Status](https://travis-ci.org/itzki/bremen.png)](https://travis-ci.org/itzki/bremen) [![Coverage Status](https://coveralls.io/repos/itzki/bremen/badge.png)](https://coveralls.io/r/itzki/bremen) [![Code Climate](https://codeclimate.com/github/itzki/bremen.png)](https://codeclimate.com/github/itzki/bremen)
 
 **Bremen** provides common search interface for some music websites. it supports YouTube, SoundCloud, MixCloud and Nicovideo
 
