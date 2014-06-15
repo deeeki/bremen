@@ -6,11 +6,11 @@ require 'bremen/version'
 Gem::Specification.new do |gem|
   gem.name          = "bremen"
   gem.version       = Bremen::VERSION
-  gem.authors       = ["itzki"]
-  gem.email         = ["itzki.h@gmail.com"]
+  gem.authors       = ["deeeki"]
+  gem.email         = ["deeeki@gmail.com"]
   gem.description   = %q{integrated searcher of audio tracks on music sites}
   gem.summary       = %q{Bremen provides common search interface for some music websites. it supports YouTube, SoundCloud, MixCloud and Nicovideo}
-  gem.homepage      = "https://github.com/itzki/bremen"
+  gem.homepage      = "https://github.com/deeeki/bremen"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

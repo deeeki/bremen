@@ -1,4 +1,4 @@
-Copyright (c) 2012 itzki
+Copyright (c) 2012 deeeki
 
 MIT License
 
