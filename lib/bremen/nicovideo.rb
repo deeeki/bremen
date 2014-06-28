@@ -55,18 +55,18 @@ module Bremen
       end
 
       def convert_multiply response
-        return [] if response.scan(%r{<div class="mb16p4">}).flatten.first
+        return [] if response.scan(%r{<div class="videoList01">}).flatten.first
 
-        response.scan(%r{<div class="thumb_col_1">\n<!---->\n(.*?)\n<!---->\n</div></div>}m).flatten.map do |html|
-          uid = html.scan(%r{<table [^>]+ summary="(.+)">}).flatten.first
-          min, sec = html.scan(%r{<p class="vinfo_length"><span>([\d:]+)</span></p>}).flatten.first.to_s.split(':')
-          created_at = Time.parse(html.scan(%r{<strong>(.+:\d\d)</strong>}).flatten.first.to_s.gsub(/\xE5\xB9\xB4|\xE6\x9C\x88|\xE6\x97\xA5/n, '')).utc
+        response.scan(%r{<li class="item" [^>]+ data-enable-uad="1">\n(.*?)\n    </li>}m).flatten.map do |html|
+          uid = html.scan(%r{<div class="itemThumb" [^>]+ data-id="(.+)">}).flatten.first
+          min, sec = html.scan(%r{<span class="videoLength">([\d:]+)</span></div>}).flatten.first.to_s.split(':')
+          created_at = Time.parse(html.scan(%r{<span class="time">(.+:\d\d)</span>}).flatten.first.to_s.gsub(/\xE5\xB9\xB4|\xE6\x9C\x88|\xE6\x97\xA5/n, '')).utc
           new({
             uid: uid,
             url: "#{BASE_URL}watch/#{uid}",
-            title: CGI.unescape(html.scan(%r{<a [^>]+ class="watch" [^>]+>(.+)</a>}).flatten.first.to_s),
+            title: CGI.unescape(html.scan(%r{<p class="itemTitle">\n\s+<a [^>]+>(.+)</a>}).flatten.first.to_s),
             length: min.to_i * 60 + sec.to_i,
-            thumbnail_url: html.scan(%r{<img src="([^"]+)"[^>]*class="img_std96" ?/?>}).flatten.first,
+            thumbnail_url: html.scan(%r{<img [^>]+data-original="([^"]+)"[^>]*data-thumbnail [^>]+/?>}).flatten.first,
             created_at: created_at,
             updated_at: created_at,
           })
