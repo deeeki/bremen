@@ -1,4 +1,12 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in bremen.gemspec
 gemspec
+
+group :development do
+  gem 'guard-minitest'
+  gem 'terminal-notifier-guard'
+end
+
+group :test do
+  gem 'coveralls', require: false
+end
