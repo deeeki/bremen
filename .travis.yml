@@ -3,3 +3,6 @@ rvm:
   - 2.1
   - 2.0.0
   - 1.9.3
+env:
+  global:
+    secure: LM9WhD9wwgih4QcFQr3+TqMlWcDzbM7PSjhMEw9W0cIo2PiPZ4aPnE06d9AkOF5vTIAMMFx8WtnJdXTzAOp5G3HKS6v8B88XvWkWNbmG4tUBF7hMX4kOMtFX3JLgvMHDXHTE8OLBpmyfUD3cYLAL+4wvp8DwjYVM14GFUgjvYa4=
