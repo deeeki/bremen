@@ -1,5 +1,7 @@
-require 'coveralls'
-Coveralls.wear!('test_frameworks')
+if ENV['CI'] && RUBY_VERSION.start_with?('2.1')
+  require 'coveralls'
+  Coveralls.wear!('test_frameworks')
+end
 
 require 'minitest/autorun'
 require 'minitest/pride'
